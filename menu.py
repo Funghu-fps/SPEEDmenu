@@ -1,7 +1,7 @@
 import pygame
 
 
-class single:
+class single:       #screen is pygame.surface class
     def __init__(self, screen, pos: tuple, font, color: tuple, msg: str, background: bool = False, backcolor: tuple = (0, 0, 0), size: tuple = (30, 30), width: int = 0, textAling_x: str = "middle", textAling_y: str = "middle"):
         # variables
         self.screen = screen
@@ -46,19 +46,21 @@ class single:
             self.text_y = (self.size[1]-self.text.get_height())+self.pos[1]
 
     # render
-
+    #rendering both text and box
     def render(self):
         if self.background:
             pygame.draw.rect(self.screen, self.backcolor,
                              (self.pos, self.size), self.width)
             self.screen.blit(self.text, (self.text_x, self.text_y))
+            
 
         # just text
         else:
             self.screen.blit(self.text, (self.text_x, self.text_y))
+            
 
-
-class menu:
+#menu class 
+class menu:             #screen is pygame.surface class
     def __init__(self, screen, pos: tuple, font, color: tuple, collumNline: tuple, gap: int, *msg: str, background=False, backcolor: tuple = (0, 0, 0), size=(30, 30), width=0, backgroundcolor=(255, 0, 0), textAling_x="middle", textAling_y="middle"):
         # variables
         self.menu_elements = []
@@ -102,7 +104,7 @@ class menu:
             i.render()
         pass
 
-# menus sus amoguS
+# menus class can be used to manage multiple menu
 
 
 class menus(object):
