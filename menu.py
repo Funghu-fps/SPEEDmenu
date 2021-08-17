@@ -1,9 +1,13 @@
 import pygame
+#use RGB only! 
+#text alling_x has left ,right and middle as options
+#text alling_y has up, down and middle
+#middle is default for both
 
-
-class single:       #screen is pygame.surface class
+#after crating a "single" object u can use single.render() to render it on the screen
+class single:       #screen is pygame.surface class                                                                               with,height                            
     def __init__(self, screen, pos: tuple, font, color: tuple, msg: str, background: bool = False, backcolor: tuple = (0, 0, 0), size: tuple = (30, 30), width: int = 0, textAling_x: str = "middle", textAling_y: str = "middle"):
-        # variables
+        # variables            position is (x,y)
         self.screen = screen
         self.pos = pos
         self.font = font
@@ -60,11 +64,14 @@ class single:       #screen is pygame.surface class
             
 
 #menu class 
+
+#menu using singles creates a menu and singles are stored in a list and u can change or edit them when ever u want
+#use menu.render() to render
 class menu:             #screen is pygame.surface class
     def __init__(self, screen, pos: tuple, font, color: tuple, collumNline: tuple, gap: int, *msg: str, background=False, backcolor: tuple = (0, 0, 0), size=(30, 30), width=0, backgroundcolor=(255, 0, 0), textAling_x="middle", textAling_y="middle"):
         # variables
-        self.menu_elements = []
-        self.menu_rects = []
+        self.menu_elements = []#singles here :)
+        self.menu_rects = []#pygame rect objects
         self.gapx,  self.gapy = gap
         self.posx,  self.posy = pos
         self.sizex,  self.sizey = size
@@ -105,8 +112,9 @@ class menu:             #screen is pygame.surface class
         pass
 
 # menus class can be used to manage multiple menu
-
-
+#menus are kept in a dict so ucan edit them as well
+#create menus object then use addmenu(keyword,menuobject) method to creare and add menus to menus.menus dict
+#you can render menus by menus.render(key)
 class menus(object):
     def __init__(self):
         self.menus = {
