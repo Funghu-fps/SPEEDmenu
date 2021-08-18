@@ -1,4 +1,4 @@
-#classic pygma stuff
+#classic pygame stuff
 import pygame
 from menu import * #import
 (width, height) = (700, 700)#window size
