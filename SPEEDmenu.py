@@ -11,8 +11,9 @@ from pygame.rect import Rect
 
 class MenuElement:
     """
-    MenuElement class creates Menu elements U can only use RGB values 
+    MenuElement class creates Menu elements U can only use RGB values
     pos(x,y) represents the left top corner of the rectangle
+    use updeate_text method for changing text after defining the object
     """
     # full constructor
 
@@ -40,13 +41,17 @@ class MenuElement:
         self.text_anti_alias = text_anti_alias
         self.draw_rect = draw_rect
         self.border_radius = border_radius
-
+        self.rendered = self.font.render(
+            self.text, self.text_anti_alias, self.text_color)
         self.rect = Rect(pos, size)
         self.text_pos_x, self.text_pos_y = 0, 0
         self.text_size: tuple[float, float] = self.font.size(self.text)
-        self.rendered = self.font.render(self.text, self.text_anti_alias, self.text_color)
+        
+        self.allingment_text()
+
 
         # middle alingment
+    def allingment_text(self):
         if self.text_alingment[0] == "middle":
             self.text_pos_x = self.size[0]/2 - \
                 self.text_size[0]/2 + self.pos[0]
@@ -59,5 +64,13 @@ class MenuElement:
         pygame.draw.rect(self.screen, self.rect_color,
                          self.rect, border_radius=self.border_radius)
         self.screen.blit(self.rendered, (self.text_pos_x, self.text_pos_y))
-    def update_text(self):
-        pass
+
+    def update_text(self, color: tuple[int, int, int], text: str, anti_alias: bool = True):
+        self.text = text
+        self.text_anti_alias = anti_alias
+        self.text_color = color
+        self.rendered = self.font.render(
+            self.text, self.text_anti_alias, self.text_color)
+
+        self.text_size: tuple[float, float] = self.font.size(self.text)
+        self.allingment_text()
