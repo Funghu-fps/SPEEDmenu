@@ -1,7 +1,6 @@
 import pygame
 
-from SPEEDmenu import MenuElement
-#from SPEEDmenu import * 
+from SPEEDmenu import * 
 
 (width, height) = (700, 700)
 running = True
@@ -16,7 +15,7 @@ pygame.display.set_caption("GAME")
 font1 = pygame.font.SysFont("Arial",25)
 print(type(font1))
 
-element = MenuElement(screen,(width/2, height/2),(80,60),font1,"SKRRRT", rect_color = (0,255,0))
+element = MenuElement(screen, (20,30), (60,50),font1, "DENEME",rect_color=(0,255,255), text_color=(0,0,0))
 
 def main():
     running = True

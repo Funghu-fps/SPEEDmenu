@@ -44,17 +44,14 @@ class MenuElement:
         self.rect = Rect(pos, size)
         self.text_pos_x, self.text_pos_y = 0, 0
         self.text_size: tuple[float, float] = self.font.size(self.text)
-        self.rendered = None
+        self.rendered = self.font.render(self.text, self.text_anti_alias, self.text_color)
 
+        # middle alingment
         if self.text_alingment[0] == "middle":
-            self.rendered = self.font.render(
-                self.text, self.text_anti_alias, self.text_color, False)
             self.text_pos_x = self.size[0]/2 - \
                 self.text_size[0]/2 + self.pos[0]
 
         if self.text_alingment[1] == "middle":
-            self.rendered = self.font.render(
-                self.text, self.text_anti_alias, self.text_color)
             self.text_pos_y = self.size[1]/2 - \
                 self.text_size[1]/2 + self.pos[1]
 
@@ -62,3 +59,5 @@ class MenuElement:
         pygame.draw.rect(self.screen, self.rect_color,
                          self.rect, border_radius=self.border_radius)
         self.screen.blit(self.rendered, (self.text_pos_x, self.text_pos_y))
+    def update_text(self):
+        pass
