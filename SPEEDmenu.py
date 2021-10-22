@@ -50,10 +50,7 @@ class MenuElement:
         
         self.allingment_text()
 
-<<<<<<< Updated upstream
-=======
         # middle alignment will come back to add more
->>>>>>> Stashed changes
 
         # middle alingment
     def allingment_text(self):
@@ -79,8 +76,6 @@ class MenuElement:
 
         self.text_size: tuple[float, float] = self.font.size(self.text)
         self.allingment_text()
-<<<<<<< Updated upstream
-=======
 
 
 class menu:
@@ -133,4 +128,3 @@ class menu:
     def render(self):
         for i in self.elements:
             i.render()
->>>>>>> Stashed changes
