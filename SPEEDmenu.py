@@ -1,6 +1,7 @@
 from typing import Text
 import pygame
 from pygame import draw
+from pygame.constants import GL_RED_SIZE
 from pygame.draw import rect
 from pygame.rect import Rect
 # use RGB only!
@@ -49,6 +50,10 @@ class MenuElement:
         
         self.allingment_text()
 
+<<<<<<< Updated upstream
+=======
+        # middle alignment will come back to add more
+>>>>>>> Stashed changes
 
         # middle alingment
     def allingment_text(self):
@@ -74,3 +79,58 @@ class MenuElement:
 
         self.text_size: tuple[float, float] = self.font.size(self.text)
         self.allingment_text()
+<<<<<<< Updated upstream
+=======
+
+
+class menu:
+    def __init__(self,
+                 screen: pygame.Surface,
+                 pos: tuple[float, float],
+                 size: tuple[float, float],
+                 margin: tuple[float, float],
+                 font: pygame.font.Font,
+                 grid: tuple[int, int],
+                 * text: list[str],
+                 text_alignment: tuple[str, str] = ("middle", "middle"),
+                 rect_color: tuple[int, int, int] = (0, 0, 0),
+                 text_color: tuple[int, int, int] = (255, 255, 255),
+                 text_anti_alias: bool = True,
+                 draw_rect: bool = True,
+                 border_radius: int = 0) -> None:
+
+        self.screen = screen
+        self.pos = pos
+        self.size = size
+        self.margin = margin
+        self.font = font
+        self.grid = grid
+        self.text = text
+        self.text_alignment = text_alignment
+        self.rect_color = rect_color
+        self.text_color = text_color
+        self.text_anti_alias = text_anti_alias
+        self.draw_rect = draw_rect
+        self.border_radius = border_radius
+        self.elements = []
+
+        self.element_pos_x,self.element_pos_y = self.pos
+        self.a = 0
+        for y in range(grid[1]):
+            for x in range(grid[0]):                
+                self.elements.append(MenuElement(self.screen,
+                                                 (self.element_pos_x,self.element_pos_y),
+                                                 self.size, self.font,
+                                                 text[self.a],
+                                                 self.text_alignment,
+                                                 self.rect_color, self.text_color,
+                                                 self.text_anti_alias, self.draw_rect,
+                                                 self.border_radius))
+                self.a += 1
+                self.element_pos_x += self.size[0] + self.margin[0]
+            self. element_pos_x = self.pos[0]
+            self.element_pos_y += self.size[1] + self.margin[1]
+    def render(self):
+        for i in self.elements:
+            i.render()
+>>>>>>> Stashed changes
