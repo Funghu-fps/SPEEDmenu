@@ -15,8 +15,8 @@ pygame.display.set_caption("GAME")
 font1 = pygame.font.SysFont("Arial",25)
 print(type(font1))
 
-element = MenuElement(screen, (20,30), (60,50),font1, "DENEME",rect_color=(0,255,255), text_color=(0,0,0))
-menu1 = menu(screen,(10,10),(100,60),(20,10),font1,(9,1),"1","2","3","4","5","6","7","8","9",)
+
+menu1 = menu(screen,(10,10),(100,60),(20,10),font1,(3,3),"1","2","3","4","5","6","7","8","9",)
 
 
 
@@ -42,7 +42,6 @@ def main():
                break
 
         pygame.display.flip()
-        element.render()
         menu1.render()
 def get_MousePos():
     pos = pygame.mouse.get_pos()
