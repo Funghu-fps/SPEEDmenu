@@ -24,11 +24,12 @@ class MenuElement:
                  size: tuple[float, float],
                  font: pygame.font.Font,
                  text: str,
-                 text_alingment: tuple[str, str] = ("middle", "middle"),
+                 text_alignment: tuple[str, str] = ("middle", "middle"),
                  rect_color: tuple[int, int, int] = (0, 0, 0),
                  text_color: tuple[int, int, int] = (255, 255, 255),
                  text_anti_alias: bool = True,
                  draw_rect: bool = True,
+                 image: pygame.image = None,
                  border_radius: int = 0) -> None:
 
         self.screen = screen
@@ -36,7 +37,7 @@ class MenuElement:
         self.size = size
         self.font = font
         self.text = text
-        self.text_alingment = text_alingment
+        self.text_alignment = text_alignment
         self.rect_color = rect_color
         self.text_color = text_color
         self.text_anti_alias = text_anti_alias
@@ -47,20 +48,30 @@ class MenuElement:
         self.rect = Rect(pos, size)
         self.text_pos_x, self.text_pos_y = 0, 0
         self.text_size: tuple[float, float] = self.font.size(self.text)
-        
-        self.allingment_text()
+
+        self.alignment_text()
 
         # middle alignment will come back to add more
 
-        # middle alingment
-    def allingment_text(self):
-        if self.text_alingment[0] == "middle":
+        # middle alignment
+
+    def alignment_text(self):
+        # middle
+        if self.text_alignment[0] == "middle":
             self.text_pos_x = self.size[0]/2 - \
                 self.text_size[0]/2 + self.pos[0]
+        elif self.text_alignment[0] == "right":
+            self.text_pos_x += (self.size[0]-self.text_size[0]) + self.pos[0]
+        else:
+            self.text_pos_x = self.pos[0]
 
-        if self.text_alingment[1] == "middle":
+        if self.text_alignment[1] == "middle":
             self.text_pos_y = self.size[1]/2 - \
                 self.text_size[1]/2 + self.pos[1]
+        elif self.text_alignment[1] == "down":
+            self.text_pos_y += (self.size[1] - self.text_size[1]) + self.pos[1]
+        else:
+            self.text_pos_y = self.pos[1]
 
     def render(self):
         pygame.draw.rect(self.screen, self.rect_color,
@@ -74,8 +85,8 @@ class MenuElement:
         self.rendered = self.font.render(
             self.text, self.text_anti_alias, self.text_color)
 
-        self.text_size: tuple[float, float] = self.font.size(self.text)
-        self.allingment_text()
+        self.text_size = self.font.size(self.text)
+        self.alignment_text()
 
 
 class menu:
@@ -109,12 +120,13 @@ class menu:
         self.border_radius = border_radius
         self.elements = []
 
-        self.element_pos_x,self.element_pos_y = self.pos
+        self.element_pos_x, self.element_pos_y = self.pos
         self.a = 0
         for y in range(grid[1]):
-            for x in range(grid[0]):                
+            for x in range(grid[0]):
                 self.elements.append(MenuElement(self.screen,
-                                                 (self.element_pos_x,self.element_pos_y),
+                                                 (self.element_pos_x,
+                                                  self.element_pos_y),
                                                  self.size, self.font,
                                                  text[self.a],
                                                  self.text_alignment,
@@ -125,6 +137,7 @@ class menu:
                 self.element_pos_x += self.size[0] + self.margin[0]
             self. element_pos_x = self.pos[0]
             self.element_pos_y += self.size[1] + self.margin[1]
+
     def render(self):
         for i in self.elements:
             i.render()
