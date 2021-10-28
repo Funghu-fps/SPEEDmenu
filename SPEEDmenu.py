@@ -42,10 +42,18 @@ class MenuElement:
         self.text_color = text_color
         self.text_anti_alias = text_anti_alias
         self.draw_rect = draw_rect
+        #self.image = image
         self.border_radius = border_radius
         self.rendered = self.font.render(
             self.text, self.text_anti_alias, self.text_color)
-        self.rect = Rect(pos, size)
+
+        if image == None:
+            self.rect = Rect(self.pos, self.size)
+            self.image = False
+        else:
+            self.rect = image
+            self.image = True
+
         self.text_pos_x, self.text_pos_y = 0, 0
         self.text_size: tuple[float, float] = self.font.size(self.text)
 
@@ -56,7 +64,7 @@ class MenuElement:
         # middle alignment
 
     def alignment_text(self):
-        # middle
+        # rows
         if self.text_alignment[0] == "middle":
             self.text_pos_x = self.size[0]/2 - \
                 self.text_size[0]/2 + self.pos[0]
@@ -64,7 +72,7 @@ class MenuElement:
             self.text_pos_x += (self.size[0]-self.text_size[0]) + self.pos[0]
         else:
             self.text_pos_x = self.pos[0]
-
+        # collums
         if self.text_alignment[1] == "middle":
             self.text_pos_y = self.size[1]/2 - \
                 self.text_size[1]/2 + self.pos[1]
@@ -74,8 +82,13 @@ class MenuElement:
             self.text_pos_y = self.pos[1]
 
     def render(self):
-        pygame.draw.rect(self.screen, self.rect_color,
-                         self.rect, border_radius=self.border_radius)
+        if self.draw_rect:
+            if self.image:
+                self.screen.blit(self.rect, self.pos)
+            else:
+                pygame.draw.rect(self.screen, self.rect_color,
+                                self.rect, border_radius=self.border_radius)
+
         self.screen.blit(self.rendered, (self.text_pos_x, self.text_pos_y))
 
     def update_text(self, color: tuple[int, int, int], text: str, anti_alias: bool = True):
@@ -103,6 +116,7 @@ class menu:
                  text_color: tuple[int, int, int] = (255, 255, 255),
                  text_anti_alias: bool = True,
                  draw_rect: bool = True,
+                 image: pygame.image = None,
                  border_radius: int = 0) -> None:
 
         self.screen = screen
@@ -117,6 +131,7 @@ class menu:
         self.text_color = text_color
         self.text_anti_alias = text_anti_alias
         self.draw_rect = draw_rect
+        self.image = image
         self.border_radius = border_radius
         self.elements = []
 
@@ -132,6 +147,7 @@ class menu:
                                                  self.text_alignment,
                                                  self.rect_color, self.text_color,
                                                  self.text_anti_alias, self.draw_rect,
+                                                 self.image,
                                                  self.border_radius))
                 self.a += 1
                 self.element_pos_x += self.size[0] + self.margin[0]
