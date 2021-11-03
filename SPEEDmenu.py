@@ -29,7 +29,7 @@ class MenuElement:
                  text_color: tuple[int, int, int] = (255, 255, 255),
                  text_anti_alias: bool = True,
                  draw_rect: bool = True,
-                 image: pygame.image = None,
+                 image: pygame.rect.Rect = None,
                  border_radius: int = 0) -> None:
 
         self.screen = screen
@@ -110,13 +110,13 @@ class menu:
                  margin: tuple[float, float],
                  font: pygame.font.Font,
                  grid: tuple[int, int],
-                 * text: list[str],
+                 * text: str,
                  text_alignment: tuple[str, str] = ("middle", "middle"),
                  rect_color: tuple[int, int, int] = (0, 0, 0),
                  text_color: tuple[int, int, int] = (255, 255, 255),
                  text_anti_alias: bool = True,
                  draw_rect: bool = True,
-                 image: pygame.image = None,
+                 image: pygame.rect.Rect = None,
                  border_radius: int = 0) -> None:
 
         self.screen = screen
