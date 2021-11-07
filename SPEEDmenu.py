@@ -16,7 +16,6 @@ class MenuElement:
     pos(x,y) represents the left top corner of the rectangle
     use updeate_text method for changing text after defining the object
     """
-    # full constructor
 
     def __init__(self,
                  screen: pygame.Surface,
@@ -103,6 +102,11 @@ class MenuElement:
 
 
 class menu:
+    """
+    Menu class creates Menu.  You can only use RGB values
+    pos(x,y) the left top corner of the menu
+    use updeate_text method for changing text after defining the object
+    """
     def __init__(self,
                  screen: pygame.Surface,
                  pos: tuple[float, float],
