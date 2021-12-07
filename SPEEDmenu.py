@@ -109,35 +109,35 @@ class menu:
     """
     def __init__(self,
                  screen: pygame.Surface,
-                 pos: tuple[float, float],
-                 size: tuple[float, float],
+                 pos:    tuple[float, float],
+                 size:   tuple[float, float],
                  margin: tuple[float, float],
-                 font: pygame.font.Font,
-                 grid: tuple[int, int],
+                 font:   pygame.font.Font,
+                 grid:   tuple[int, int],
                  * text: str,
                  text_alignment: tuple[str, str] = ("middle", "middle"),
-                 rect_color: tuple[int, int, int] = (0, 0, 0),
-                 text_color: tuple[int, int, int] = (255, 255, 255),
+                 rect_color:     tuple[int, int, int] = (0, 0, 0),
+                 text_color:     tuple[int, int, int] = (255, 255, 255),
                  text_anti_alias: bool = True,
-                 draw_rect: bool = True,
-                 image: pygame.rect.Rect = None,
-                 border_radius: int = 0) -> None:
+                 draw_rect:      bool = True,
+                 image:          pygame.rect.Rect = None,
+                 border_radius:  int = 0) -> None:
 
         self.screen = screen
-        self.pos = pos
-        self.size = size
+        self.pos =    pos
+        self.size =   size
         self.margin = margin
-        self.font = font
-        self.grid = grid
-        self.text = text
+        self.font =   font
+        self.grid =   grid
+        self.text =   text
         self.text_alignment = text_alignment
-        self.rect_color = rect_color
-        self.text_color = text_color
+        self.rect_color =     rect_color
+        self.text_color =     text_color
         self.text_anti_alias = text_anti_alias
-        self.draw_rect = draw_rect
-        self.image = image
-        self.border_radius = border_radius
-        self.elements = []
+        self.draw_rect =      draw_rect
+        self.image =          image
+        self.border_radius =  border_radius
+        self.elements =       []        
 
         self.element_pos_x, self.element_pos_y = self.pos
         self.a = 0
@@ -157,7 +157,11 @@ class menu:
                 self.element_pos_x += self.size[0] + self.margin[0]
             self. element_pos_x = self.pos[0]
             self.element_pos_y += self.size[1] + self.margin[1]
-
+    def auto_menu(self):
+       pass 
+   
     def render(self):
         for i in self.elements:
             i.render()
+
+
