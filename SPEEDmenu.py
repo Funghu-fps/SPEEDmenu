@@ -41,7 +41,7 @@ class MenuElement:
         self.text_color = text_color
         self.text_anti_alias = text_anti_alias
         self.draw_rect = draw_rect
-        #self.image = image
+        # self.image = image
         self.border_radius = border_radius
         self.rendered = self.font.render(
             self.text, self.text_anti_alias, self.text_color)
@@ -86,7 +86,7 @@ class MenuElement:
                 self.screen.blit(self.rect, self.pos)
             else:
                 pygame.draw.rect(self.screen, self.rect_color,
-                                self.rect, border_radius=self.border_radius)
+                                 self.rect, border_radius=self.border_radius)
 
         self.screen.blit(self.rendered, (self.text_pos_x, self.text_pos_y))
 
@@ -107,6 +107,7 @@ class menu:
     pos(x,y) the left top corner of the menu
     use updeate_text method for changing text after defining the object
     """
+
     def __init__(self,
                  screen: pygame.Surface,
                  pos:    tuple[float, float],
@@ -124,44 +125,81 @@ class menu:
                  border_radius:  int = 0) -> None:
 
         self.screen = screen
-        self.pos =    pos
-        self.size =   size
+        self.pos = pos
+        self.size = size
         self.margin = margin
-        self.font =   font
-        self.grid =   grid
-        self.text =   text
+        self.font = font
+        self.grid = grid
+        self.text = text
         self.text_alignment = text_alignment
-        self.rect_color =     rect_color
-        self.text_color =     text_color
+        self.rect_color = rect_color
+        self.text_color = text_color
         self.text_anti_alias = text_anti_alias
-        self.draw_rect =      draw_rect
-        self.image =          image
-        self.border_radius =  border_radius
-        self.elements =       []        
+        self.draw_rect = draw_rect
+        self.image = image
+        self.border_radius = border_radius
+        self.elements = []
 
         self.element_pos_x, self.element_pos_y = self.pos
-        self.a = 0
-        for y in range(grid[1]):
-            for x in range(grid[0]):
+        self.calculate_element_positions()
+# margin[left, bottom, right, top]
+
+    def calculate_element_positions(self) -> None:
+        """
+        this method is used to re calculate menu's position
+
+        """
+        self.elements = []
+        self.element_pos_x, self.element_pos_y = self.pos
+        a = 0
+        for y in range(self.grid[1]):
+            for x in range(self.grid[0]):
                 self.elements.append(MenuElement(self.screen,
                                                  (self.element_pos_x,
                                                   self.element_pos_y),
                                                  self.size, self.font,
-                                                 text[self.a],
+                                                 self.text[a],
                                                  self.text_alignment,
                                                  self.rect_color, self.text_color,
                                                  self.text_anti_alias, self.draw_rect,
                                                  self.image,
                                                  self.border_radius))
-                self.a += 1
+                a += 1
                 self.element_pos_x += self.size[0] + self.margin[0]
             self. element_pos_x = self.pos[0]
             self.element_pos_y += self.size[1] + self.margin[1]
-    def auto_menu(self):
-       pass 
-   
+    # margin[left, bottom, right, top]
+
+    def auto_menu(self, alignment: tuple[str, str]) -> None:
+        """
+        this method aligns the menu according to 'screen' size.
+        """
+        screen_size = self.screen.get_size()
+        menu_lenght_x = self.size[0] * self.grid[0] + \
+            self.margin[0] * (self.grid[0] - 1)
+        menu_lenght_y = self.size[1] * self.grid[1] + \
+            self.margin[1] * (self.grid[1]-1)
+        # horizontal
+        if alignment[0] == "middle":
+            print(self.pos)
+            self.pos = ((screen_size[0] - menu_lenght_x)/2, self.pos[1])
+            print(self.pos)
+        elif alignment[0] == "right":
+            self.pos = ((screen_size[0] - menu_lenght_x) -
+                        self.margin[0], self.pos[1])
+        else:
+            self.pos = (self.margin[0], self.pos[1])
+        # vertical
+        if alignment[1] == "middle":
+            self.pos = (self.pos[0], (screen_size[1] - menu_lenght_y) / 2)
+        elif alignment[1] == "down":
+            self.pos = (self.pos[0], (screen_size[1] -
+                        menu_lenght_y) - self.margin[1])
+        else:
+            self.pos = (self.pos[0],self.margin[1])
+
+        self.calculate_element_positions()
+
     def render(self):
         for i in self.elements:
             i.render()
-
-
