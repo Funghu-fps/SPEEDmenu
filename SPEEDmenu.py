@@ -52,6 +52,7 @@ class MenuElement:
         else:
             self.rect = image
             self.image = True
+            self.size = image.get_size()
 
         self.text_pos_x, self.text_pos_y = 0, 0
         self.text_size: tuple[float, float] = self.font.size(self.text)

@@ -18,12 +18,12 @@ print(type(font1))
 
 a = pygame.image.load("button.png")
 
-menu1 = menu(screen,(30,30),(100,60),(10,10),font1,(2,2),"1","2","3","4")
+menu1 = menu(screen,(30,30),(100,60),(10,10),font1,(2,2),"1","2","3","4", image=a)
 
 # element1 = MenuElement(screen, (300, 300), (100, 60),
 #                        font1, "31", text_alignment=("a", "bp"),image=a)
 #auto menu aligns the menu 
-menu1.auto_menu(["left","top"])
+menu1.auto_menu(["middle","top"])
 
 #element.update_text((255,255,255), "asdk")
 def main():
