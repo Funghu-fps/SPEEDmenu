@@ -197,7 +197,7 @@ class menu:
             self.pos = (self.pos[0], (screen_size[1] -
                         menu_lenght_y) - self.margin[1])
         else:
-            self.pos = (self.pos[0],self.margin[1])
+            self.pos = (self.pos[0], self.margin[1])
 
         self.calculate_element_positions()
 
