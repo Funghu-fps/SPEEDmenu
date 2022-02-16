@@ -12,9 +12,10 @@ from pygame.rect import Rect
 
 class MenuElement:
     """
+    ### Menu element
     MenuElement class creates Menu elements U can only use RGB values
     pos(x,y) represents the left top corner of the rectangle
-    use updeate_text method for changing text after defining the object
+    use update_text method for changing text after defining the object
     """
 
     def __init__(self,
@@ -104,9 +105,10 @@ class MenuElement:
 
 class menu:
     """
-    Menu class creates Menu.  You can only use RGB values
+    ### Menu
+    Menu class creates a Menu.  You can only use _RGB_ values
     pos(x,y) the left top corner of the menu
-    use updeate_text method for changing text after defining the object
+    use update_text method for changing text after defining the object
     """
 
     def __init__(self,
@@ -173,7 +175,8 @@ class menu:
 
     def auto_menu(self, alignment: tuple[str, str]) -> None:
         """
-        this method aligns the menu according to 'screen' size.
+        ### auto_menu
+        transforms menu using screen size
         """
         screen_size = self.screen.get_size()
         menu_lenght_x = self.size[0] * self.grid[0] + \
